@@ -26,7 +26,7 @@ Conduit unlocks completely new possibilities for Vanilla Minecraft servers using
     </td>
     <td align="center" width="50%">
       <!-- REPLACE THE SRC WITH YOUR ACTUAL IMAGE LINK -->
-      <img src="https://via.placeholder.com/400x225.png?text=Litematic+Plugin" alt="Litematic Plugin" width="100%"><br>
+      <img src="https://github.com/1attila/test/blob/main/LitematicPlugin.png?raw=true" alt="Litematic Plugin" width="100%"><br>
       <b>🏗️ Litematic</b><br>
       A pure, mod-less Python implementation for loading Litematica schematics directly into your world.
     </td>
