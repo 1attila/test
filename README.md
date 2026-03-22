@@ -82,44 +82,44 @@ flowchart LR
     subgraph ConduitSystem["Conduit Framework (Single Process)"]
         direction TB
         CLI(💻 CLI):::conduit
-        Core{⚙️ Core Handler}:::conduit
+        Handler{⚙️ Handler}:::conduit
         Plug([🧩 Plugins]):::plugin
         Tail(📜 Pygtail):::conduit
     end
 
     %% User Interaction
     U <-->|Uses| CLI
-    CLI <--> Core
-    Core <-->|API| Plug
-    Tail -->|Dispatches Events| Core
+    CLI <--> Handler
+    Handler <--> Plug
+    Tail --> Handler
 
     %% Servers
     subgraph S1["Survival Server"]
-        MC1(🌳 Minecraft):::mc
+        MC1(Minecraft):::mc
         L1(📄 latest.log):::log
         MC1 --> L1
     end
 
     subgraph S2 ["Creative Server"]
-        MC2(🎨 Minecraft):::mc
+        MC2(Minecraft):::mc
         L2(📄 latest.log):::log
         MC2 --> L2
     end
 
     subgraph S3 ["Mirror Server"]
-        MC3(🪞 Minecraft):::mc
+        MC3(Minecraft):::mc
         L3(📄 latest.log):::log
         MC3 --> L3
     end
 
     %% Connections
-    L1 -.->|Read| Tail
-    L2 -.->|Read| Tail
-    L3 -.->|Read| Tail
+    L1 --> Tail
+    L2 --> Tail
+    L3 --> Tail
 
-    Core <-->|RCON / Fetch| MC1
-    Core <-->|RCON / Fetch| MC2
-    Core <-->|RCON / Fetch| MC3
+    Handler <-->|RCON / Fetch| MC1
+    Handler <-->|RCON / Fetch| MC2
+    Handler <-->|RCON / Fetch| MC3
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
