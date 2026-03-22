@@ -71,25 +71,40 @@ This makes installation drastically easier, prevents server crashes if a plugin 
 ```mermaid
 flowchart LR
 
-    c("Conduit")
-
-    s1("Minecraft Survival server")
-    s2("Minecraft Creative server")
-    s3("Minecraft Mirror server")
-
+    subgraph Conduit
+    h("Handler")
+    p("Pygtail")
     cli("Cli")
-
-    s1 --> Pygtail --> c
-    s2 --> Pygtail --> c
-    s3 --> Pygtail --> c
-
-    c <--> r1("Rcon") <--> s1
-    c <--> r2("Rcon") <--> s2
-    c <--> r3("Rcon") <--> s3
-
-    c <--> cli
-    c <--> p("Plugins")
+    h <--> cli
+    h <--> pl("Plugins")
     cli <-.-> u[/user/]
+    end
+
+    subgraph Survival server
+    s1("Minecraft Survival server")
+    l1("/logs/latest.log")
+    s1 --> l1
+    end
+
+    subgraph Creative server
+    s2("Minecraft Creative server")
+    l2("/logs/latest.log")
+    s2 --> l2
+    end
+
+    subgraph Mirror server
+    s3("Minecraft Mirror server")
+    l3("/logs/latest.log")
+    s3 --> l3
+    end
+
+    l1 --> p --> h
+    l2 --> p --> h
+    l3 --> p --> h
+
+    h <--> r1("Rcon") <--> s1
+    h <--> r2("Rcon") <--> s2
+    h <--> r3("Rcon") <--> s3
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
