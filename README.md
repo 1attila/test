@@ -48,7 +48,7 @@ Conduit unlocks completely new possibilities for Vanilla Minecraft servers using
 Conduit is an easy-to-use tool that allows you to control one or multiple Minecraft servers using Python. 
 
 It is designed with flexibility in mind and can be used in two ways:
-1. **As a Standalone Server:** Run `python -m mconduit` from your console, and it will automatically load all your plugins, connect to your servers, and start listening to events.
+1. **As a Standalone Program:** Run `python -m mconduit` from your console, and it will automatically load all your plugins, connect to your servers, and start listening to events.
 2. **As an API Framework:** Import `mconduit` directly into your own Python applications to harness its powerful features—like Rcon dispatching, log-tailing, and data fetching—on your own terms.
 
 ## 🚀 Key Features
@@ -72,7 +72,7 @@ This makes installation drastically easier, prevents server crashes if a plugin 
 flowchart LR
     %% Colors and Styles
     classDef user fill:#f9a826,stroke:#333,stroke-width:2px,color:#000;
-    classDef conduit fill:#7e57c2,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef conduit fill:#2196f3,stroke:#fff,stroke-width:2px,color:#fff;
     classDef plugin fill:#ffca28,stroke:#333,stroke-width:2px,color:#000;
     classDef mc fill:#4caf50,stroke:#fff,stroke-width:2px,color:#fff;
     classDef log fill:#607d8b,stroke:#fff,stroke-width:1px,color:#fff;
@@ -80,18 +80,14 @@ flowchart LR
     U([👤 User]):::user
 
     subgraph ConduitSystem["Conduit Framework (Single Process)"]
-        direction TB
-        CLI(💻 CLI):::conduit
-        Handler{⚙️ Handler}:::conduit
+        direction LR
+        Handler(⚙️ Handler):::conduit
         Plug([🧩 Plugins]):::plugin
-        Tail(📜 Pygtail):::conduit
     end
 
     %% User Interaction
-    U <-->|Uses| CLI
-    CLI <--> Handler
+    U <-->|💻 CLI| Handler
     Handler <--> Plug
-    Tail --> Handler
 
     %% Servers
     subgraph S1["Survival Server"]
@@ -106,20 +102,12 @@ flowchart LR
         MC2 --> L2
     end
 
-    subgraph S3 ["Mirror Server"]
-        MC3(Minecraft):::mc
-        L3(📄 latest.log):::log
-        MC3 --> L3
-    end
-
     %% Connections
-    L1 --> Tail
-    L2 --> Tail
-    L3 --> Tail
+    L1 --> |📜 Pygtail| Handler
+    L2 --> |📜 Pygtail| Handler
 
-    Handler <-->|RCON / Fetch| MC1
-    Handler <-->|RCON / Fetch| MC2
-    Handler <-->|RCON / Fetch| MC3
+    Handler <-->|Rcon| MC1
+    Handler <-->|Rcon| MC2
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
@@ -135,42 +123,26 @@ flowchart LR
     U([👤 User]):::user
 
     subgraph Env1["Survival Environment"]
-        C1(💻 CLI):::mcdr
-        M1{⚙️ MCDR}:::mcdr
+        M1(⚙️ MCDR):::mcdr
         P1([🧩 Plugins]):::plugin
         S1(🌳 Minecraft):::mc
         
-        C1 <--> M1
         M1 <--> P1
-        M1 <-->|Wraps / Stdio| S1
+        M1 <-->|Stdio| S1
     end
 
     subgraph Env2 ["Creative Environment"]
-        C2(💻 CLI):::mcdr
-        M2{⚙️ MCDR}:::mcdr
+        M2(⚙️ MCDR):::mcdr
         P2([🧩 Plugins]):::plugin
         S2(🎨 Minecraft):::mc
         
-        C2 <--> M2
         M2 <--> P2
-        M2 <-->|Wraps / Stdio| S2
-    end
-
-    subgraph Env3 ["Mirror Environment"]
-        C3(💻 CLI):::mcdr
-        M3{⚙️ MCDR}:::mcdr
-        P3([🧩 Plugins]):::plugin
-        S3(🪞 Minecraft):::mc
-        
-        C3 <--> M3
-        M3 <--> P3
-        M3 <-->|Wraps / Stdio| S3
+        M2 <-->|Stdio| S2
     end
 
     %% User Interaction
-    U <-.-> C1
-    U <-.-> C2
-    U <-.-> C3
+    U <-.->|💻 CLI| M1
+    U <-.->|💻 CLI| M2
 ```
 
 ### Why choose Conduit?
@@ -222,7 +194,7 @@ We are actively developing Conduit. Future updates include:
 
 ## 🤝 Contributing
 Contributions are more than welcome! Whether it's reporting bugs, suggesting features, writing documentation, or creating awesome new plugins.
-- **Discord:** Contact me directly at `attila8829`
+- **Discord:** Contact me directly at `attila8829` or join [MultiTech discord]()
 - **Pull Requests:** Feel free to open an issue or PR on this repository!
 
 ## 💙 Credits
