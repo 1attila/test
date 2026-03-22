@@ -70,76 +70,107 @@ This makes installation drastically easier, prevents server crashes if a plugin 
 ### The Conduit Architecture
 ```mermaid
 flowchart LR
+    %% Colors and Styles
+    classDef user fill:#f9a826,stroke:#333,stroke-width:2px,color:#000;
+    classDef conduit fill:#7e57c2,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef plugin fill:#ffca28,stroke:#333,stroke-width:2px,color:#000;
+    classDef mc fill:#4caf50,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef log fill:#607d8b,stroke:#fff,stroke-width:1px,color:#fff;
 
-    subgraph Conduit
-    h("Handler")
-    p("Pygtail")
-    cli("Cli")
-    h <--> cli
-    h <--> pl("Plugins")
-    cli <-.-> u[/user/]
+    U([👤 User]):::user
+
+    subgraph ConduitSystem["Conduit Framework (Single Process)"]
+        direction TB
+        CLI(💻 CLI):::conduit
+        Core{⚙️ Core Handler}:::conduit
+        Plug([🧩 Plugins]):::plugin
+        Tail(📜 Pygtail):::conduit
     end
 
-    subgraph Survival server
-    s1("Minecraft Survival server")
-    l1("/logs/latest.log")
-    s1 --> l1
+    %% User Interaction
+    U <-->|Uses| CLI
+    CLI <--> Core
+    Core <-->|API| Plug
+    Tail -->|Dispatches Events| Core
+
+    %% Servers
+    subgraph S1["Survival Server"]
+        MC1(🌳 Minecraft):::mc
+        L1(📄 latest.log):::log
+        MC1 --> L1
     end
 
-    subgraph Creative server
-    s2("Minecraft Creative server")
-    l2("/logs/latest.log")
-    s2 --> l2
+    subgraph S2 ["Creative Server"]
+        MC2(🎨 Minecraft):::mc
+        L2(📄 latest.log):::log
+        MC2 --> L2
     end
 
-    subgraph Mirror server
-    s3("Minecraft Mirror server")
-    l3("/logs/latest.log")
-    s3 --> l3
+    subgraph S3 ["Mirror Server"]
+        MC3(🪞 Minecraft):::mc
+        L3(📄 latest.log):::log
+        MC3 --> L3
     end
 
-    l1 --> p --> h
-    l2 --> p --> h
-    l3 --> p --> h
+    %% Connections
+    L1 -.->|Read| Tail
+    L2 -.->|Read| Tail
+    L3 -.->|Read| Tail
 
-    h <--> r1("Rcon") <--> s1
-    h <--> r2("Rcon") <--> s2
-    h <--> r3("Rcon") <--> s3
+    Core <-->|RCON / Fetch| MC1
+    Core <-->|RCON / Fetch| MC2
+    Core <-->|RCON / Fetch| MC3
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
 
 ```mermaid
 flowchart LR
+    %% Colors and Styles
+    classDef user fill:#f9a826,stroke:#333,stroke-width:2px,color:#000;
+    classDef mcdr fill:#2196f3,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef plugin fill:#ffca28,stroke:#333,stroke-width:2px,color:#000;
+    classDef mc fill:#4caf50,stroke:#fff,stroke-width:2px,color:#fff;
 
-    subgraph Mirror server
-    m3("MCDR")
-    s3("Minecraft Mirror server")
-    c3("Cli")
+    U([👤 User]):::user
 
-    c3 <--> m3 <--> s3
-    m3 <--> p3("Plugins")
+    subgraph Env1["Survival Environment"]
+        C1(💻 CLI):::mcdr
+        M1{⚙️ MCDR}:::mcdr
+        P1([🧩 Plugins]):::plugin
+        S1(🌳 Minecraft):::mc
+        
+        C1 <--> M1
+        M1 <--> P1
+        M1 <-->|Wraps / Stdio| S1
     end
 
-    subgraph Creative server
-    m2("MCDR")
-    s2("Minecraft Creative server")
-    c2("Cli")
-
-    c2 <--> m2 <--> s2
-    m2 <--> p2("Plugins")
+    subgraph Env2 ["Creative Environment"]
+        C2(💻 CLI):::mcdr
+        M2{⚙️ MCDR}:::mcdr
+        P2([🧩 Plugins]):::plugin
+        S2(🎨 Minecraft):::mc
+        
+        C2 <--> M2
+        M2 <--> P2
+        M2 <-->|Wraps / Stdio| S2
     end
 
-    subgraph Survival server
-    m1("MCDR")
-    s1("Minecraft Survival server")
-    c1("Cli")
-
-    c1 <--> m1 <--> s1
-    m1 <--> p1("Plugins")
+    subgraph Env3 ["Mirror Environment"]
+        C3(💻 CLI):::mcdr
+        M3{⚙️ MCDR}:::mcdr
+        P3([🧩 Plugins]):::plugin
+        S3(🪞 Minecraft):::mc
+        
+        C3 <--> M3
+        M3 <--> P3
+        M3 <-->|Wraps / Stdio| S3
     end
 
-    user[/user/] <-.-> c1 & c2 & c3
+    %% User Interaction
+    U <-.-> C1
+    U <-.-> C2
+    U <-.-> C3
 ```
 
 ### Why choose Conduit?
