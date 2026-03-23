@@ -106,8 +106,8 @@ flowchart LR
     L1 --> |📜 Pygtail| Handler
     L2 --> |📜 Pygtail| Handler
 
-    Handler <-->|🛜 Rcon| MC1
-    Handler <-->|🛜 Rcon| MC2
+    Handler <-.->|🛜 Rcon| MC1
+    Handler <-.->|🛜 Rcon| MC2
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
@@ -123,6 +123,8 @@ flowchart LR
     U([👤 User]):::user
 
     subgraph Env1["Survival Environment"]
+        direction TB
+
         M1(⚙️ MCDR):::mcdr
         P1([🧩 Plugins]):::plugin
         S1(🌳 Minecraft):::mc
@@ -132,6 +134,8 @@ flowchart LR
     end
 
     subgraph Env2 ["Creative Environment"]
+        direction TB
+
         M2(⚙️ MCDR):::mcdr
         P2([🧩 Plugins]):::plugin
         S2(🎨 Minecraft):::mc
