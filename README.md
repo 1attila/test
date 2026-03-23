@@ -85,7 +85,7 @@ flowchart LR
         Handler(⚙️ Handler):::conduit
         Plug([🧩 Plugins]):::plugin
 
-        Handler <--> Plug
+        Plug <--> Handler
     end    
 
     %% Servers
@@ -111,10 +111,10 @@ flowchart LR
     %% Connections
 
     Handler <-.->|🛜 Rcon| MC1
-    Handler <-.->|📜 Pygtail| L1
+    Handler <--->|📜 Pygtail| L1
     
     Handler <-.->|🛜 Rcon| MC2
-    Handler <-.->|📜 Pygtail| L2
+    Handler <--->|📜 Pygtail| L2
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
