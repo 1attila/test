@@ -106,8 +106,8 @@ flowchart LR
     L1 --> |📜 Pygtail| Handler
     L2 --> |📜 Pygtail| Handler
 
-    Handler <-->|Rcon| MC1
-    Handler <-->|Rcon| MC2
+    Handler <-->|🛜 Rcon| MC1
+    Handler <-->|🛜 Rcon| MC2
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
