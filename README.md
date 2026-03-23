@@ -63,7 +63,7 @@ It is designed with flexibility in mind and can be used in two ways:
 
 ## ⚙️ How it Works (Conduit vs MCDR)
 
-Conduit is highly inspired by [MCDReforged](https://github.com/MCDReforged/MCDReforged), but with a major architectural difference: **Conduit doesn't wrap or run the Minecraft server directly.** It runs in a parallel process, communicating via Pygtail (Logs) and Rcon. 
+Conduit is highly inspired by [MCDReforged](https://github.com/MCDReforged/MCDReforged), but with a major architectural difference: **Conduit doesn't run the Minecraft server directly.** It runs in a parallel process, communicating via Pygtail (Logs) and Rcon. 
 
 This makes installation drastically easier, prevents server crashes if a plugin fails, and allows managing multiple servers from a single instance.
 
@@ -194,8 +194,8 @@ We are actively developing Conduit. Future updates include:
 
 ## 🤝 Contributing
 Contributions are more than welcome! Whether it's reporting bugs, suggesting features, writing documentation, or creating awesome new plugins.
-- **Discord:** Contact me directly at `attila8829` or join [MultiTech discord]()
+- **Discord:** Contact me directly at `attila8829` or join [MultiTech discord](https://discord.gg/uVUnNbVmhh)
 - **Pull Requests:** Feel free to open an issue or PR on this repository!
 
 ## 💙 Credits
-This project was heavily inspired by the amazing work done by the [MCDReforged](https://github.com/MCDReforged/MCDReforged) team. Huge credits to them for pioneering this space!
+This project was heavily inspired by the amazing work done by the [MCDReforged](https://github.com/MCDReforged) team. Huge credits to them for pioneering this space!
