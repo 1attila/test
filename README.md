@@ -80,34 +80,41 @@ flowchart LR
     U([👤 User]):::user
 
     subgraph ConduitSystem["Conduit Framework (Single Process)"]
-        direction LR
+        direction TB
+
         Handler(⚙️ Handler):::conduit
         Plug([🧩 Plugins]):::plugin
-    end
 
-    %% User Interaction
-    U <-->|💻 CLI| Handler
-    Handler <--> Plug
+        Handler <--> Plug
+    end    
 
     %% Servers
     subgraph S1["Survival Server"]
+        direction TB
+
         MC1(Minecraft):::mc
         L1(📄 latest.log):::log
         MC1 --> L1
     end
 
     subgraph S2 ["Creative Server"]
+        direction TB
+
         MC2(Minecraft):::mc
         L2(📄 latest.log):::log
         MC2 --> L2
     end
 
+    %% User Interaction
+    U <-.->|💻 CLI| Handler
+
     %% Connections
-    L1 --> |📜 Pygtail| Handler
-    L2 --> |📜 Pygtail| Handler
 
     Handler <-.->|🛜 Rcon| MC1
+    Handler <-.->|📜 Pygtail| L1
+    
     Handler <-.->|🛜 Rcon| MC2
+    Handler <-.->|📜 Pygtail| L2
 ```
 
 This instead is a simplified scheme of how **MCDR** works:
@@ -127,7 +134,7 @@ flowchart LR
 
         M1(⚙️ MCDR):::mcdr
         P1([🧩 Plugins]):::plugin
-        S1(🌳 Minecraft):::mc
+        S1(Minecraft):::mc
         
         M1 <--> P1
         M1 <-->|Stdio| S1
@@ -138,7 +145,7 @@ flowchart LR
 
         M2(⚙️ MCDR):::mcdr
         P2([🧩 Plugins]):::plugin
-        S2(🎨 Minecraft):::mc
+        S2(Minecraft):::mc
         
         M2 <--> P2
         M2 <-->|Stdio| S2
