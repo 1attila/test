@@ -2,8 +2,6 @@
   
   <img src="https://github.com/1attila/test/blob/main/conduit_logo.svg?raw=true" alt="Conduit Logo" width=600/>
 
-  <br/><br/>
-
   [![Python Versions](https://img.shields.io/pypi/pyversions/mconduit.svg)](https://pypi.org/project/mconduit)
   [![PyPI Version](https://img.shields.io/pypi/v/mconduit.svg)](https://pypi.org/project/mconduit)
   [![License](https://img.shields.io/github/license/1attila/Conduit.svg)](https://github.com/1attila/Conduit/blob/main/LICENSE)
