@@ -46,8 +46,10 @@ Conduit unlocks completely new possibilities for Vanilla Minecraft servers using
 Conduit is an easy-to-use tool that allows you to control one or multiple Minecraft servers using Python. 
 
 It is designed with flexibility in mind and can be used in two ways:
-1. **As a Standalone Program:** Run `python -m mconduit` from your console, and it will automatically load all your plugins, connect to your servers, and start listening to events.
-2. **As an API Framework:** Import `mconduit` directly into your own Python applications to harness its powerful features—like Rcon dispatching, log-tailing, and data fetching—on your own terms.
+1. **As a Standalone Program:** Run `python -m mconduit` from your console, and it will automatically load all your plugins, connect to your servers, and start listening to events. Look [how to install](https://github.com/1attila/Conduit/wiki/How-to-install) (it's very quick and easy)!
+
+
+2. **As an API Framework:** Import `mconduit` directly into your own Python applications to harness its powerful features - like Rcon dispatching, log-tailing, and data fetching - on your own terms.
 
 ## 🚀 Key Features
 
@@ -63,7 +65,9 @@ It is designed with flexibility in mind and can be used in two ways:
 
 Conduit is highly inspired by [MCDReforged](https://github.com/MCDReforged/MCDReforged), but with a major architectural difference: **Conduit doesn't run the Minecraft server directly.** It runs in a parallel process, communicating via Pygtail (Logs) and Rcon. 
 
-This makes installation drastically easier, prevents server crashes if a plugin fails, and allows managing multiple servers from a single instance.
+This prevents server crashes if something fails and makes it reloadable at runtime!
+
+Another important difference is that Conduit allows managing multiple servers from a single instance.
 
 ### The Conduit Architecture
 ```mermaid
@@ -197,7 +201,6 @@ Everything you need to know about building plugins, configuring the server, and 
 ## 🗺️ Roadmap
 We are actively developing Conduit. Future updates include:
 - Support for Bukkit / Spigot / Paper / Forge / Fabric log formats.
-- Built-in graphical UIs.
 - More event hooks and deeper data fetching.
 - Further CLI enhancements.
 
