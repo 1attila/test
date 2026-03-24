@@ -1,6 +1,6 @@
 <div align="center">
   
-  <img src="https://github.com/1attila/test/blob/main/conduit_logo.svg?raw=true" alt="Conduit Logo" width=700/>
+  <img src="https://github.com/1attila/test/blob/main/conduit_logo.svg?raw=true" alt="Conduit Logo" width=600/>
 
   <br/><br/>
 
