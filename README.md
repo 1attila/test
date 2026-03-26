@@ -1,6 +1,6 @@
 <div align="center">
   
-  <img src="https://github.com/1attila/test/blob/main/conduit_logo.svg?raw=true" alt="Conduit Logo" width=600/>
+  <img src="https://github.com/1attila/test/blob/arch/conduit_logo.svg?raw=true" alt="Conduit Logo" width=600/>
 
   [![Python Versions](https://img.shields.io/pypi/pyversions/mconduit.svg)](https://pypi.org/project/mconduit)
   [![PyPI Version](https://img.shields.io/pypi/v/mconduit.svg)](https://pypi.org/project/mconduit)
